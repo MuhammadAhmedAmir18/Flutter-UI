@@ -1,0 +1,411 @@
+Screens/CreateNewAccount.dart-------------------------------------------------------------------
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:registration_app/widgets/password_input.dart';
+import 'package:registration_app/widgets/text-field-input.dart';
+import '../widgets/backgroundImage.dart';
+import '../widgets/rounded-button.dart';
+class CreateNewAccount extends StatelessWidget {
+  const CreateNewAccount({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size=MediaQuery.of(context).size;
+    return Stack(
+      children: [
+        BackgroundImage(image: "assets/images/1559105.jpg"),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: size.width*0.1
+                ),
+                Stack(
+                  children: [ Center(
+                    child: CircleAvatar(
+                      radius: size.width*0.14,
+                      backgroundColor: Colors.grey[700],
+                      child: Icon(FontAwesomeIcons.user,size: size.width*0.1,),
+                    ),
+                  ),
+                    Positioned(
+                      top: size.height*0.08,
+                      left: size.width*0.56,
+                      child: Container(
+                        height: size.height*0.06,
+                        width: size.width*0.06,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white,width: 2)
+                        ),
+                        child: Icon(FontAwesomeIcons.arrowUp,color: Colors.white,),
+                      ),
+                    )
+                ]),
+                SizedBox(
+                    height: size.width*0.1
+                ),
+                Column(
+                  children: [
+                    TextInputField(icon: FontAwesomeIcons.user, hint: "Username",
+                        inputType: TextInputType.name, inputAction: TextInputAction.next),
+                    TextInputField(icon: FontAwesomeIcons.envelope, hint: "Email", 
+                        inputType: TextInputType.emailAddress, inputAction: TextInputAction.next),
+                    PasswordInput(icon: FontAwesomeIcons.lock, hint: "Password",
+                      inputAction: TextInputAction.next, inputType: TextInputType.visiblePassword,),
+                    PasswordInput(icon: FontAwesomeIcons.lock, hint: "Confirm Password",
+                      inputAction: TextInputAction.done , inputType: TextInputType.visiblePassword,),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    RoundedButton(buttonName: "Register"),
+                    SizedBox(
+                      height:30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Already have an account?"),
+                        GestureDetector(
+                          onTap:()=> Navigator.pushNamed(context, "/") ,
+                            child: Text("Login",style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold),)),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    
+                  ],
+                )
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+Screens/ForgotPassword.dart------------------------------------------------------------------------------------------------------------------
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:registration_app/widgets/backgroundImage.dart';
+import 'package:registration_app/widgets/rounded-button.dart';
+import 'package:registration_app/widgets/text-field-input.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+class ForgotPassword extends StatelessWidget {
+  const ForgotPassword({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size= MediaQuery.of(context).size;
+    return Stack(
+      children: [
+        const BackgroundImage(image: "assets/images/548.png"),
+        SafeArea(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0.0,
+              leading:  IconButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back_ios,color: Colors.white,),
+              ),
+              title: Text("Forgot Password",),
+              centerTitle: true,
+            ),
+            body: Column(
+              children: [
+                Center(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: size.height*0.1,
+                      ),
+                      Container(
+                        width: size.width*1.5,
+                            child:
+                            Text("Enter your Email we will send instruction to reset your password"),
+                        ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      TextInputField(icon: FontAwesomeIcons.envelope,
+                          hint: "Email",
+                          inputType: TextInputType.emailAddress,
+                          inputAction: TextInputAction.done),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      RoundedButton(buttonName: 'Send'),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        )
+
+
+      ],
+    );
+  }
+}
+
+Screens/login_screen.dart------------------------------------------------------------------------------------------------------------------------------------
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../widgets/backgroundImage.dart';
+import '../widgets/password_input.dart';
+import '../widgets/rounded-button.dart';
+import '../widgets/text-field-input.dart';
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+          BackgroundImage(image: "assets/images/login.jpg",),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Column(
+            children: [
+              Flexible(child:
+              Center(child:
+              Text('FoodyBite',
+                style: TextStyle(color: Colors.white,fontSize: 60,fontWeight: FontWeight.bold),))
+              ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      TextInputField(
+                        icon: FontAwesomeIcons.envelope,
+                        hint: 'Email',
+                        inputType: TextInputType.emailAddress,
+                        inputAction: TextInputAction.next,
+                      ),
+                    ],
+                  ),
+                  PasswordInput(
+                    icon: FontAwesomeIcons.lock,
+                    hint: 'Password',
+                    inputType: TextInputType.name,
+                    inputAction: TextInputAction.done,
+                  ),
+                        GestureDetector(
+                          onTap: ()=> Navigator.pushNamed(context, 'ForgotPassword'),
+                           child: Text("Forgot Password?",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                      ),
+                         ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  RoundedButton(buttonName: 'Login',),
+                  SizedBox(
+                    height: 25,
+                  ),
+              GestureDetector(
+                onTap: ()=>Navigator.pushNamed(context, "CreateNewAccount"),
+                child: Container(
+                  child: Text("Create New Account",style: TextStyle(color: Colors.white),),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width:1,
+                        color: Colors.white,
+                      )
+                    )
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              )
+        ],),
+        )]);
+  }
+}
+
+screens/screens.dart--------------------------------------------------------------------------------------------------------------------------------
+export 'login_screen.dart';
+export 'ForgotPassword.dart';
+export 'CreateNewAccount.dart';
+
+widgets/backgroundImage.dart---------------------------------------------------------------------------------------------------------------
+import 'package:flutter/material.dart';
+class BackgroundImage extends StatelessWidget {
+  const BackgroundImage({
+    Key? key,
+    required this.image,
+  }) : super(key: key);
+  final String image;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(image),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
+          )
+      ),
+    );
+  }
+}
+
+widgets/passwordinput.dart--------------------------------------------------------------------------------------------------------------------------
+import 'package:flutter/material.dart';
+class PasswordInput extends StatelessWidget {
+  const PasswordInput({
+    Key? key, required this.icon,required this.hint,required this.inputType,required this.inputAction,
+  }) : super(key: key);
+  final IconData icon;
+  final String hint;
+  final TextInputType inputType;
+  final TextInputAction inputAction;
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Container(
+        height: size.height*0.08,
+        width: size.width*0.8,
+        decoration: BoxDecoration(
+          color: Colors.grey[500]?.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: TextField(
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            prefixIcon: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Icon(icon,size: 30,color: Colors.white,),
+            ),
+            hintText: hint,
+          ),
+          obscureText: true,
+          keyboardType: inputType,
+          textInputAction: inputAction,
+        ),
+      ),
+    );
+  }
+}
+
+widgets/roundedbutton.dart-------------------------------------------------------------------------------------------------------------------------
+import 'package:flutter/material.dart';
+class RoundedButton extends StatelessWidget {
+  const RoundedButton({
+    Key? key, required this.buttonName,
+  }) : super(key: key);
+  final String buttonName;
+
+  @override
+  Widget build(BuildContext context) {
+    Size size=MediaQuery.of(context).size;
+    return Container(
+        height: size.height*0.08,
+        width: size.height*0.40,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+        ),
+        child: ElevatedButton( onPressed: (){},child:  Text(buttonName,
+          style: TextStyle(fontWeight:FontWeight.bold, ),),)
+    );
+  }
+}
+
+widgets/textfieldinput.dart------------------------------------------------------------------------------------------------------------------------
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+class TextInputField extends StatelessWidget {
+  const TextInputField({
+    Key? key, required this.icon, required this.hint, required this.inputType, required this.inputAction,
+
+  }) : super(key: key);
+  final IconData icon;
+  final String hint;
+  final TextInputType inputType;
+  final TextInputAction inputAction;
+
+  @override
+  Widget build(BuildContext context) {
+    Size size=MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Container(
+        height: size.height*0.08,
+        width: size.width*0.8,
+        decoration: BoxDecoration(
+          color: Colors.grey[500]?.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: TextField(
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            prefixIcon: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Icon(FontAwesomeIcons.envelope,size: 30,color: Colors.white,),
+            ),
+            hintText: 'Email',
+          ),
+          keyboardType: TextInputType.emailAddress,
+          textInputAction: TextInputAction.next,
+        ),
+      ),
+    );
+  }
+}
+
+widgets/widgets.dart--------------------------------------------------------------------------------------------------------------------------------------
+export 'password_input.dart';
+export 'text-field-input.dart';
+export 'rounded-button.dart';
+
+main.dart----------------------------------------------------------------------------------------------------------------------------------------------
+import 'package:flutter/material.dart';
+import 'package:registration_app/screens/login_screen.dart';
+import 'screens/CreateNewAccount.dart';
+import 'screens/ForgotPassword.dart';
+void main(){
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'FoodyBite',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      initialRoute: '/',
+      routes:{
+        '/':(context)=>LoginScreen(),
+        'ForgotPassword':(context)=>ForgotPassword(),
+        'CreateNewAccount':(context)=>CreateNewAccount(),
+      }
+    );
+  }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
